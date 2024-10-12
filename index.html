@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aircraft Sales</title>
+    <style>
+        /* Загальні стилі */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa; /* Світло-сірий фон */
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #0056b3; /* Темно-синій */
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffcc00; /* Жовтий */
+        }
+
+        /* Секція Hero */
+        .hero {
+            height: 100vh;
+            background: url('aircraft-hero.jpg') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: heroFadeIn 2s ease-in-out;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6); /* Напівпрозорий фон */
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            animation: scaleUp 0.5s forwards;
+        }
+
+        .hero h2 {
+            font-size: 70px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            animation: slideDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 26px;
+            margin-bottom: 20px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .hero a {
+            padding: 15px 30px;
+            background: #ffcc00; /* Жовтий */
+            color: #0056b3; /* Темно-синій */
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s ease, transform 0.2s;
+            animation: fadeIn 2s ease;
+        }
+
+        .hero a:hover {
+            background: #e6b800; /* Трохи темніший жовтий */
+            transform: scale(1.05);
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0.5); }
+            to { transform: scale(1); }
+        }
+
+        @keyframes heroFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Секція про літаки */
+        .about {
+            padding: 80px 20px;
+            text-align: center;
+            background-color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            position: relative;
+            display: inline-block;
+        }
+
+        .about h2:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: #ffcc00; /* Жовтий */
+            margin: 10px auto;
+        }
+
+        .about p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            animation: textFadeIn 2s ease-in;
+        }
+
+        /* Секція продуктів */
+        .products {
+            padding: 80px 20px;
+            background-color: #f3f3f3;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+        }
+
+        .product {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: slideUp 1s ease-in;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .product img {
+            max-width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .product img:hover {
+            transform: scale(1.1);
+        }
+
+        .product h3 {
+            margin: 15px 0;
+            font-size: 24px;
+            color: #0056b3; /* Темно-синій */
+        }
+
+        .product p {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .product a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ffcc00; /* Жовтий */
+            color: #0056b3; /* Темно-синій */
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .product a:hover {
+            background-color: #e6b800; /* Трохи темніший жовтий */
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Футер */
+        footer {
+            background-color: #0056b3; /* Темно-синій */
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Кнопка "Повернутися до верху" */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #0056b3; /* Темно-синій */
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: none;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-to-top:hover {
+            background-color: #ffcc00; /* Жовтий */
+        }
+
+        @media (max-width: 768px) {
+            .product {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Заголовок -->
+    <header>
+        <div class="container">
+            <h1>Aircraft Sales</h1>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#products">Aircraft</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Секція Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Your Dream Aircraft Awaits</h2>
+            <p>Explore our exclusive collection of aircraft for sale.</p>
+            <a href="#products">View Aircraft</a>
+        </div>
+    </section>
+
+    <!-- Секція про літаки -->
+    <section class="about" id="about">
+        <h2>About Our Aircraft</h2>
+        <p>We provide a wide range of aircraft for sale, from private jets to commercial airliners. Our commitment is to offer the best deals and quality service in the aviation industry.</p>
+    </section>
+
+    <!-- Секція продуктів -->
+    <section class="products" id="products">
+        <h2>Featured Aircraft</h2>
+        <div class="product">
+            <img src="https://senfil.net/uploads/posts/2015-01/1421660856_65.jpg" alt="Private Jet">
+            <h3>Private Jet</h3>
+            <p>Luxurious private jet for the ultimate travel experience.</p>
+            <a href="#">Buy Now</a>
+        </div>
+        <div class="product">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFdkWLR91i5Oh9PrLSGhCKrl3vZ2xe2F0n1LXirp59RIjhL0gXI_kT7AB8yu3Ga6nV44o&usqp=CAU" alt="Commercial Airliner">
+            <h3>Commercial Airliner</h3>
+            <p>Spacious and efficient airliner suitable for commercial use.</p>
+            <a href="#">Buy Now</a>
+        </div>
+        <div class="product">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxITEhUSExIVEhUQEBUVFRUVFRUVEBUVFRIWFhUVFRUYHSggGBolHRUVITEhJSkrLi4uFx8zODMtNyguLisBCgoKDg0OFxAQGi0dHR0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0vLS0tLS0tLS0tLS0tLf/AABEIAJoBRwMBEQACEQEDEQH/xAAbAAACAwEBAQAAAAAAAAAAAAACAwEEBQAGB//EAD4QAAIBAgQDBgQDBgQHAQAAAAECAAMRBBIhMQVBUQYTImFxgTKRobEUQlJygpLB0fAHFWLhIzNDU5Oishb/xAAaAQEBAQEBAQEAAAAAAAAAAAAAAQIDBAUG/8QAMxEAAgIBAgMFBwQDAQEBAAAAAAECEQMEEiExQQVRcdHwEzJhgZGhsRQiweEVI0LxUjP/2gAMAwEAAhEDEQA/AN+fTPENSnICO7gUcFgEOYAoykIgpxaARmkBBaARmlBBaAAWgIEtAOvBCM0oIgDFkKSYASCCHCQDVMGkMCyAkpAogrAFkwQ6ACZQKYSgAiBRwSAF3UWCQkAagkA4GQoLmALYSkIJgFWq0oK7SkAKyg2hMgfRW43tIzSFZjKSwg8gCNImLLQllggBEpBZMAEtABLQCM0FILQCLykOgEhYBBEAkLADAkB0FGIYBJkBK6QB9NtZkqNFAD6zJsDE0NJUyNGVUm0YYOaAQWgAkygWTBA0MFGgyAkGAEIBN5AQTAIEoIYQBFVJQIKykBIgGnTMgQ7aQoSpeC0NpUZlsqOqm0qDKVR5owCal4KQyQQQwlABEAG0oIIgEiQBqIAxFkAeSASVgAmALgBrACYwUEPAJFWSgWqGIN5GiplypiLrbnMpGrMuqDNowKvKDrwAmkAsyglYINWQpNoBwMAm8AEtAIBgEwAWEAWySgApBDYp4UybjSiMNA9JLFDqGHPSZcjSQ56dpLLRVq0rzSZloo1MOZqzNEDDHeLFHMhlBIw+l5LFCHomWyDaeEO8WWiDhTFigGw9osHBD0ghIpmLKEaZgAlTAAKGCE9yRFlIywQBhAOCwAhSMWAgLSFLFMjrIyoGsIQYnu5bIHTw8WKIrJaEGVmlIGqwUcFkBBEAEwASZQDeASIAYMgGKsAYlGQtE1MLziw0b/dgTlZ0JpLflDZUiwFsLnSwmGzVGHje1eDQfGz/ALNNyPZiAD855pavHDjd+CPbDs7PPol4tfjmM4Jx7DYpiiZlYagOFBYdVsTeXBrIZm1HmjOp0OTAk5U0+4vvgrz17jxbQ0wQtJuG0Grw8GVTDiCcFaNxNpB4eDG8bR6YYWt0k3FoXUww9JUxQA4ctr7xvJsEtggJrcTacuGtFijqtAdITDQKYa/K0WSgmwA5CNxdol8ATLuJtAbAeUbhtF/5f5S7ibS1S4aJncaUQ34eOUm4bStXwGk0pEcSp3BE1ZmiHUmAx1Kl5SFLDJYaSFM7ErNIyxK0ZbINWlaSxQxlgoorBBbpKgLKGUhwpxZQ+7ksEhIBewlDrMtmkiyaUzZqgGHKEQ2zS6TnfedKOUZY5jkQ9S8qVBs+R9p+HmhiXUfCxzpf9LE6exuPYT87rcXssr7nxR+r0Gf22BN81wfj/fMzqFUqQykgg3BGhB8p44ycXceDPZKKknFq0z6L2X7WiralWIWpsrbK/r0afd0mtWX9s+Evz6/8Pzuu7PeG54+Mfx/XpnrQ099Hyw80lAgtFAAtKQAtLQBzy0Q7PFAgtAsEwCbCARaAMUwA5kp2UQAHpiWxQBaUhGaKFi61SVIjZnuLzaMgLSglFinSkspz0rxYFvh5bFC/wsWShq4fSSy0C1KWxQv8MYslENRixQo0ZSUF3MWWiGoxYoZTw8jYot0qdpls0g2SSygMkpDUq1bG3Sc0jbYsveaoglzKiHme3PDu8oioB4qBv6odG+Wh9jPB2jh9pi3LnHj8uvmfT7K1Hs82x8p/np5Hzy1p+eP1AamQHtey3a21qVc3Gy1DuOgfy859jR9oXUMr8H5+f1Pha7sznkwrxXl5fTuPcpUvPr0fDJLxQBzSkBMAgLAJymACVlIQDADvIU68Ai8AkPFAIPJQJzRQsS4lIeX7XU69E08Th2YZWy1KYJ7tuYLJe3UE76jpPFqvaQcckOnNd59TQvFkjLDlrjyfVfM1uG4ta6BwLH8y3BKnoSN/XnPZCakrR87LieOTiy6tCas50GKQiy0HlkKLKykAKykJSmTsCfTWRsD1wFQ/lI9dPvJvia2sP/LLfE6D3uftJu7kKI7ikN6t/Rf95f3dw4d4rE1sMqlnZsqi5JICgdSZYxm3SI3ErUcfhnGamudb2vmNtJra+8lruFtjKV9KZH7x/rLtfeS0Kr46igzPdQOZNx9oaCG4HHUqhIRgSACV2NjsQOY8xMM0qZeySWUgrAIKQAGexmqJYs1paJZK1QYoWG5BBBFwQQRyIOhEzRU2naPk/GMD3NZ6X6W0PVTqp+RE/K6nD7LI4H7TS5/bYoz7+fj1K+HoM5sqs3oL2mIYp5HUFZ0yZoY1c3S+JbPCa41NJreVifkDedZaHUJXt/k861+mk6U1+PybHZztK9A93Vu1O9tb509PLynq0mtli/15eX3X9ekeXW9nxzr2mKlL7P8Av4/XvPe0sQrqGUhlYXBGxn3YtNWuKPzcouLcZKmhqAmUyWqWGJmHIqQ4YW0m41tO7q0WKArU5UyNFVlmiAmADKQgmARmlIEDIUIGAcJABjcItWm1NvhqKVNtxfYjzBsR6TMoqSafU6Y5vHJTXNHzahxR8JXJb41fJVQAhXUH4r+liPXnPlx1PsZ1PnyfmfenpFqMa2cuaf8AHn4cuFH0vh1Za1MVaV3Vhe4BJHUEDn5T6m9VdnwHCSltapoujAtzsvqR/KNyJTIOHQfFUHsLxbfJDgLerhxzZvew+k1tkS4im4nTHw0199T9ZfZt82TcuiFVOOPysPSVY4om5lOrxNz+YzSikS2Va2NsLswAG5JsBfQamUhSrcWpqbFxfvVpczao4uqm21/OUFdeMB7BUds7VUJy2VWpbh77BtbHaZlTTT4plXAdhK5KKxTuyyglDup5g7XmMcIY1UEkvgqK25c3YFXMWuDpl2tzPPe26jl95qwlwGvZxlYAg20IuOojcShWEwlOmS1NFQtuQNT01ksUX8NxJwBrf12i0y8UbatcA2tcA26XEwaIBlBWY3mzIupTlslCWBE0iBq5kB5ntvgsyLWA1p+Fv2SfCfYn/wBp8jtXBcFkXTn4f+n3OxdRU3hfXivHr9vwLrBqGGQ0VDaAsbX3W5e3P+U3Jy0+nXslff5mIKGq1clndc6Xg6r1zMqj2hrA65XHpY+xE+fHtTNF/upn0snY+nkv23F+Pn/RsUTSxSEshGU2udCNL+F+Yn0oPDrYXKPL1zPlZFn7PyKMJWn07/FdPl9SjguODD1iKV2o3F0JNj1KE7fzng/Vx0+WsfHH3fmvXE+lLQy1OFPNwyd/4Tr0vqfQ+E41KyCpTa6n5g9CORn2oZI5IqUXaZ+ey4p4pOE1TRT4/jK+GenXpsXpFslWkT4bn4WUn4b7b2uB1M8OqeTFKOSPGPVH0uz4YdTCeGfCdXGX5Xx/NX3I3cDxJKyCohurD3B5gjkR0nqg1OKlHimeDNCeGbhNU16+hZVbynPmc1K8WWirVwxm1Iy0K7qWyUKdJSEKkoCFG+2slihq4Bz+Uj10+8m9F2sYOHkbso97mTd8C7SGp0hvUJ9AP53l/c+hOCFriaS/qqebW+ygCNku8bkfPv8AEfCd7XpVKSgPVBRlHMrbK3r4rewnye0cSWSFcXL+K8z9B2RmbxZN3CMa+93+PuV+BcVrYPwLUNRDfMBbIG6pzK/K/lN4FPC0lxXrkebV5cGdbuUuld3x5fzXLieo4Vx4YlMylgRoyt8Q+XLfWfVxzjJcD47i1zDqYtAQC63ckKLi7FRdgBzI5zdhRKuJx6q60zctUR2UAb5ACwB2vqJLNbSrT4i7hClJrVaDOC3hyOLZabjle+9+UWNosHEsDfJSzYcWt4mp1ze99wyjT5RuJRXrU8xKviCDUw4pMikL47MxqpzUkK3svlJvJtZ2Iw1DMwqAsalBFe9znRG8JNt2ueWuotJvG04Y2le4pktUIJsoJLKotcnmBbWZ3F2lxXLKGBtc3PO4B1F43ChojcKAqUr8yPQ2v77/ACkcipEOwQeJgoA/MbfeYlkjH3nRqGKU/dTfgJp46mzBFJqMdggLX99rec4rV43LbF2/hxPS9DmUd0ltXxdf2egwOAAszjX9O4Hr1M9KXeeRl9zNEAvAKivOhiyGeAdlvvAHZZC0V8RhQ6sjfC6kH0P85mcVOLi+TNY5yxzU481xPEYDH1aFT8O4zhXyWHxDXdeo528+U+Jp9VkwZPYSW5J18T9JqtFh1WP28HtbV/D5/wAv8lrifBA9ZSvhDAmoR5HSw/UdfleejU6BZcyceCfP13s8ej7SeLTy38WuEfXcv5ouYrCrlyEinRVfEAbFvInkvXmfv654ls2e7Bff+u/v/Pjw55ObyJOWVvh8PjXV93RLv6YFbhQCVKubKguaYYeJhyvfa/LmZ8nJoVsnlTpdL9deh9qHaD9pDDVy/wCmuSf9dencP4GmJpOjoTTD731GUfqX30mtHptRCUWuClz8PivwY1up0uSEoy/c4/n4P89PE9U3aNawqUTS7xQuVyGCm5vooI1ItvcWM+nOSyueOK3Jc+PXuXpHycWJ6f2eaUtkm7XC+VcX5ceBicA4rUwx74gmi5s4IHitoGtfwtcWvPl6Z5sC9q1+x8/xfPg+/wD8Pua2On1X+pP/AGLl+auuKriuq+qPa4PtjgSf+fl/aRx8zYiez9dhfX7M+O+zNTH/AJ+68zdwuOo1hek4qD/Te07QyRlydnnyYZ4/eVDGpt0HubTocgawTm4EqUu4joqPXoDclvtN7ZmW4iW4nSHw0x76/ea9m3zZneu4W/G32Fh6SrFEm9lSpxFz+YzW1Im5iGrk7neaIVDxOlp/xFOdHdcpzZlp/GVte9vKAVxxpWF6aPVvhfxCWFlca2QE6h9tCOcAxu0OKcupy5b0RlB+Md58YYflOmX0vPDqYXkUu5Ue3FnccLxLq7fy6eBk2nGjBRr1BTcNuAVYgEgkqwKkW56D+xNQcou0Ks9jwoYeooqUlBvVarzLLVceP0Jvttznr37uKNRhEv1KoX4iF/aIB+RMlSK3FdTswIvcW630+c4T1GOHvSS+Z1jp8mT3Yt/I8tj+FV3xBqLUCpnVxdyazDIabLRIsEUqWAudGYm8kM0MjW13frgTJpcuNNzjVAN2WqVKairWLOe6apdQxzq5LkE3BGVmUIRlvblpOp5uRsnDUKYXMVXuwoBZ7EBVCgXvqPCNOovMyywjzaRuGHJP3Yt+CIXF0QPApe2v/DpMw5bNa3Ic+U5PUw6W/BNnZaLJdSqPi0vtz+wnE8XZRcYepa17v4QPXQzz5da4q1BnpxdnQm6eVfLj9OKKacUxVTSnT/gR3+u0861mpye5D7M9f6HR4v8A9JfVpf2VeMU8bSpGtVFQU1IvZ1UjMbAlVOguZXg1k+M3S8fILU6DH7kU34X92V8JwPFVgGp0wAwBztouv+ptT7CcY6HJNqk2u98D15NfhxrjJX3Lj+D3HZbgr4ZWD1A7VCpNgbKQDezHVhr0G0+vpNM8EWm7s+Dr9XHUSTiqr7/Lobl56zwkEwQGUFMibMEiATmgoQaASDIDG7RYkUAKy0gxc5WbYggeG5AudAflPFq836db1G74XyPpaDB+qfs5TaS41z8a6HmMdx9npZACrNfOw6f6emk+Zk7Sc8e1Km+b8vXmfYxdlQx5t7dxXurz9c+7kXWfD1GpeNWCC1NLi97bsPRRoZ9JLT5ZQ/cnXJef0Plt6vDHL+1py4yl5fV8VfyCx1OxNWswyUz4EG1+TN1Y9OU1lhT9rmfCPJfy+9/DoYwZG4rDp1+6XN/wu5Lv6isTi6gw/egHNV+C2uUNfL72F/XymM2olDT+06y5fC/6+50waSE9V7LpDn8aq/vw8DCwYqoSVfur733Pt1nxMWaeNva6s/Q5NPjypb1dG7wXhhq08jVW7kHU2Cg63IUnU6672nv0uPLnxOG6of3yV/E+drc2DT5VPbeTouPhb+Xz/J6Kk+EwtPMKahTbVhnep0vm9zyntlDBp8V+6n82/wCT5sZ6nVZ65yXyUf7+pqYntDVGg8Wl1CDX0I9xr58rT1Rgk6fE8Evd3LhTp+vl8enHiU63FK7WsLXH5m2PMEL/AHpO1JdDjdg1seqi7uq2tclgACTYanqdB1lIVa/GqSkgvqtVKTWBJV3tlDaaDUa7SAWnFixAFKoR+Iai5Itlyi/ec7odNfOLFHUq2JYISiJaswqKTe9IZgrIRzPhNj9Jnci0TSwta6F65OSu76AAPTYEJTcCwNrjXy943Fo6jwymuQksxpValRCzEspqXzAH9Ou0m4UOoUaKZQlNRkzFdNVzm7ZTyvNEGVcYEFyQoH92AH2h8CczwHF1qV6jPUqGzaBRoFUbKOfrPJN27Z3XBAghdyx/eN/kf9pg0iKuJuNF921kKY+F4vkqmnTdlzDxFScreXmf95xy5ZY1uR7tHihmeyX0/s3aGNa2ZE/faxO+4LaA+k+blnqMy4t19D7mHDpsPCKV/VlnD8UqNnVqguyjKzFSmYHa5FhdSwv6TGCKjuhatrg+FWv6s3nbeySTpPild018OLp19xOPx5LLZ8+RACwN1LFmdiG5i7Wv5TWfLKOSFO3Hr3u7fkYw4VKE7VKb5fCkl9lfws28NwTFV1VzU8LqGGaq2x28Kie2ek1GSTe79r5cXy8D5kddpsKSUP3LnSXPrxNPB9kggJLgvbQhAbemckX8yJ1w9mxhbbt+HmebP2rPI6SqPjz+n4NCjwCnYd41Wo1he9Vwl+dlQgWnqWlj/wBNv5+VHkerl/ykvkv5su08FSX4aaDzyi/zOs7LFBckjhLLOXNv6li82czI7WY/uMJVrd33vdhTktmBHeLqw5qNz5AyS4I1HmU+xPF3r0bNkYUlphalMEU2BUjLqx8ShVvr+caCSLtFkqPR3mjJF4BBMAjNBCrOhkka6DU/WQDvwVU/9N/4TJuj3l2vuJGAq/8Abb5Rvj3l2sMcOq/oP0/rJvj3jazG7SvSRDQrNkaolwtizb+FrLe2o59J4tZnw7Hjm+MvS+59Ls/Bn9os0FwjzbdeP2PDCko5A+Z3ngx6eEY01bPfl1WacrjKl8EgRhEBD5b2OxLZTbrY3nRYMdqVcjH6zNxi5c/giOM8RZiL+FRYKgF1Fh6/Uyaz/arlKkunQ6aCaxPbGNt9ev15Uu4t8H44oQ0a4zUzsbHw31tpra+umoP056XVwjB4cyuP49fY7azRTnkWfA6mvv65ceDRaRMAnjL5+ikkj5AD6ztHFoMb3Xfw/qvyed5u08i2bdvx5fdt/YuUuICoyWKpSZWsCVDEjMMpW/wgDl5eo9+PN7WmuEK81XgfOy4lg3RfHJfk7XW74euNip3dZlqFXY0iwC6FM19STtfQbkekk1jyyU2m9t8Ol+fj9BCWXBjcE1FTp31r4f0n14ltkYqxzZXdSARrk0OW197E3853i+bfNnkm00ox5L1f9f3dNuHMwIqVnbPhhScL4QW51V/S3tNbzFK+A3/K6JzlkzGqiI+Yk5xT+DN5+cm9ii4qKCSAAWsSQBckaAk85ncWg88liiM8llonPJZaE1cSq/Eyr6kD7w5xjxk6LHFOfupvwRkY7j1BN6oPpcj3O0sdVh5bkzctFnStxa9dxgcS7SIdLlhysp/p/OcMmrhLgmdsegyvpRm4Piq1VzKLXYgAkKbj0/qZic6TbMQx3NR+NBVKBceIKvmuYH0JBF58uWul0R9iOgw97ZXxXDmZSq5LHS7ZmOo10O0Q1vG5t/KjctA6rHFL4v1wM0YJqRoK6FHY3UMCCy5mXMDzFuYnuzu8TfSj52li46iK6pm2lA6T4jl0P0ypcTSwvBK9T4aTnzykL/EdJ1hpc8+UX+PycMmt0+P3pL14G3gexdQ27xlpjnbxP8hp9Z7Ydl5JP97pHz8vbONL/Wm39D2+HpBFVF2RQo9ALCfcSpUfnW222+owmUhBaCAFpQDeASWkBF5QdmgEFoBGaAdeAUy02ZIzSkDDkbG0lFGrinH52HoxH85HFdwtjBxCqP8AqP8AxGTZHuNbn3nju3eDq1GXEIpc2yVMutS1/A2UDxAXYE77chp4tVpFOpR4NHv0WteK4S4xlzR5B+9BsSR5HQz4bzzXBn6RafE+KVjaWJIpsh1Lm4Yk+EG1wB7fWdFrZbHF8X3nnfZ+P2qmuCXTv9dxV7o9d55vaumu893s1afcS1M9fpMqSNNDcPSGZQzWBYAnoL6mWLTkk+CMztRbStm7xHHoEFKg4RQMp8Lai1tNNb3Op5z6uXUQ2KGKSilw9cOJ8bBp8iyvJng5SdNVXmq5cF3FOjxNkrNUS+VyLqdM2nvY+c8n6xwzOcOKf3PY9Esunjjnwa5fD11PWYLGJVW6H1B+JfUT7GLPDKriz89n0s8Eqmvn0ZZE62caFVcTTX4nVfUgTEssY+86OkMGSfuxb8EVKnG6A2YueiqT9TYfWeeeuwx634Hrh2ZqJdK8X6ZWq9oP00j6uwX6a/eeeXaK/wCY/XgeqHZD/wC5/RX5fgSnEMVV/wCWv/jptUPz1E5fqtRk9xfRNnf9Fo8Xvu/F+VDn7P491Zn7wKqknO6otgLnwKb/AEkeHVT5t/WvsFqdHjf7Evkr+78zsL2ErMoZ2SncnQhma199Os1DsyclxlRnJ2xCLpJs8t2ywNTAMvemkyVGITI167KtszGmwsotfW51tOi7O2v90ji+1XLlE26PCeF4nhmIxdKtiFOHQ5mawq03FiAaSFVfNcAeKxvuCDb0w02KHFL6niy6vLkfF14HzvhXEMOz01qKaKBrO6guwW3x2HO/QTH6fd70n66HZavbwhBcF6Z9kwPZXC5FbM1YMisGzAIwIBDLl5G995uHZmBc7fz8iT7XzvhGo/Lzv8Grh+G0KfwUkBHO12+Z1nrx6bFj92KXrvPDl1efJ782/XcFisNTqW7xFe17ZlDWvva+2w+U6zxxmqkk/E5Y8s8buDa8OAWFoU6fwIifsqF+0kcUIe6kvBFnlnk96Tfi7LfeXmqMHZ4BxeARnigQWigDmgHZpSAloKcGgEZoITeAdeQHZoKU6k6IwDeUB5pAAaktCyBVihZIrSULOZwdwD6i/wB5HFPmaUmuTK9Xh2Hf4qSa9FCn5rYzhPSYZc4L6HohrdRHlN/W/wAmPjeyKm5pVSu1lcArvr4gL7Xngydkw/4deJ9LF21JcMkb8PXkPw/YynbxVmJ6hVA+WsyuyIVxkxLtrJf7Yr5+kBiOxliMlRbfmLKbgeQB1+kxLslf8z+p0h206e6P09eYv/8ADsSLV105d2dffMY/xLSrd9n5j/NW+MPv/Q8dhH/7qfJpy/xMv/v7HT/NR/8Ah/UKn2FqX0qoD1Aa/wDKVdlzTtTr6kfbMGqcPwaC9g6hHixftkc/epN/oZ/9ZG/r5nP/ACUFxjiS+nkHT7A0h8VZz+yiL9802uzsdcX6+5h9rZeiXr6Fyj2Rwq7io/7VRh/8ZZ1joMKXJv5+VHCXaeofJpfLzsv0eE4en8FGmp65AW/iOs9MMGKPFRS+R5Z6jLP3pN/M0cKB8p0kcki02UixsbjUHYzmbs58OW5S7qJtPgf+LXZTHf5hUrLQq16VYJ3TU0eoAAiqaZCg5Te+nO9+sw/3M0uCPZ9gOw4o4GvQxPibiCL3qLp3SqpyKDqC6lib7XtvbXfs6XEzvt8Dy9X/AApxlGqVoGnVpPa1V27tk8qiC5b929/KcMuB5GuPI9GHUezT4cz6rwbhC0cPSoA5u4pJTzHQtlUC5HK9p6+SR5KsbVwntKpEaKdSnabTMsXKQ7NBSVeSgEGgE3gEXgEEwAS0oBLQQjNAIzQCc0FJzQLOvAKTPOhiwTUglgtWihYpqktEsjPFFCDyCxgvACF4KMVjIUtUXmWimnQS4vMFHLQECySsgsNVgWWFqaTDibUg9CJmmaUlQgJNGbAZJSEUkYXNodMqssYEEn+9JifI1E0WawnI6FOsb7zouBh8RdLKOVrSu2RUHVkRWIw5F7GakmZVFisikaTCtGnRkVqU7pnNorPSmrM0V6iSkFGUhwqRRQu9igQasUCO8igCXigDngHZ4BOeATmgHZoBBeAQ1AzVmaFnDkxYoIYBrRuQ2i6mAYcoUkHFlc0TNWZLFHCEyORUjZwuAFrm205OZ0URdTCi9gJdxKG1eH2XzmVO2acSoKVpuzBoYFjtMspdkIdaASDAOvILOvKDgZKLZO8chxZdo2tacJczvHkMSwmWaAqMJUGVqpm0ZKxqTVGThiesbSbgKzC9wZpLhxIwkqSNFTOYgyFKlddZtGWVqk0jJWdZTIppoCy0AEvFCyM8USyO8loWDngWEDBTs0hCQ8FsnPAsjPAPVjBA8p59522jU4WDMvIXYPTh4HITO9mtqJr4dbbCRSYaMjFYdb7TvGTOUkhCACbMmjRp3HrOTZ0SLdHCjpMORpRHNRvoRMplorVOHW1m1kM7Bf4K2omlPvMuHccKR6Ga3I57WE9Fhy+WsKSZXBoXNGDoBEAZTXymJPuOkY94ZAttMW+pukhJqETVWLCGJ6zO0u4Na0lFsXWfSVIjKNRp1Rhi80pLCBgE5ooBhpCiqjwQrEzRBbykK1SUhXczRAGMEA1lAYSSygBTeWyDDpIUWSYIRmlBOeCkZ4oh9INp8/iewMVRJRbAbES7RZXq+LYzS4GXxKOJwxHP5TpGRhoo1UAOhPnOiMM1eHppOU2dImkotOJ0GIOcgF15URiFra2m6ImMzdJkoQGkFEtSF9RNKTMOKK70bnSdFPhxObx8eBFGgb68olPhwEYceIdOmSdNphs6JDqtEATKkVozau9p1RhjMLRFrnUzMmypC69TWaSI2UsTiPpNxiZkxSPeUySXloWd3sULOSvYw0LH1K+aZUaNWIYykEvKiCWMpCvUMpCu5mkZFM0pADUlopIrSULCFaKFnGrFCwS8UALygEmCHXlB9JbSfOPaKL9JSAM0pBVNzrNUSxhpEgyWrKZlZbHUbzqjkzS4TUO055EbgzTZpxOpKVIoC6zXlRGVKtE7ibUuhlobSr23kasqdDRiBM7S2S1URQsqFheb6GRuFa9xJIsSGrBb8oqxdFOti/ObUTLkVe+uZujNmvh6ItfXXrODZ1SKePpX0UXm4OuZmSvkZmKwrKdba9DedoyTOTi0Jp0m6fKVtESY0p1kstCyktkoHLKSh1GmTpbeZbNJDmpW3EzdloFcMG2Mu6glYNbhjCRZEHBlKvhiN50UrMNUVXozVmWis+HM1ZKAOFMWKYo0DLZCBQPSWyEigYsDBhzIUj8OYsHPhWiwD+GbpAPoFaeBHsYlZohLwGRT3hgv0xMM0UMcottznSJiQ/AD7TMxEtHeYNhLIDjBQTBCpjPhnSPMzLkV6E0zKGXkNCzv7S9DPUZhTqZJFiIxRliRlF50MnYb4xJLkFzPRrtPMdyKA+8rCCKjpBAHUW2EFfIysUJ2icmZf9Z1OYynuIYRaofHOb5G1zLtQC3vMI30M+po+mk6Lkc+pfvpOXU6mZxPf2nbGcplQTZgB5UARBAkUX2gB1AIKxdoIA8qIDhd5pkLijf1mQGgF5Cs/9k=" alt="Helicopter">
+            <h3>Helicopter</h3>
+            <p>Versatile helicopter for quick and flexible travel solutions.</p>
+            <a href="#">Buy Now</a>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <p>&copy; 2024 Aircraft Sales. All rights reserved.</p>
+    </footer>
+
+    <!-- Кнопка "Повернутися до верху" -->
+    <a href="#" class="back-to-top">↑</a>
+
+    <script>
+        // Плавне прокручування до секцій
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Показати кнопку повернення наверх при прокручуванні
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 200) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
